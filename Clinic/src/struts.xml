@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<include file="struts-common.xml" />
+
+	<package name="admin-default" extends="locationfinder-default">
+		<interceptors>
+			<interceptor name="locationfinder-i18n" class="com.app.fe.web.interceptor.I18nInterceptor" />
+			<interceptor name="hibernateValidatorInterceptor" class="com.app.common.fe.impl.validator.HibernateValidatorInterceptor">
+				<param name="excludeMethods">input,back,cancel,browse</param>
+			</interceptor>
+
+			<interceptor-stack name="paramsPrepareParamsStack">
+				<interceptor-ref name="exception">
+					<param name="logEnabled">true</param>
+					<param name="logLevel">ERROR</param>
+				</interceptor-ref>
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="locationfinder-i18n" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="multiselect" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*,d-\d+?-[sopn],.*\\.*,.*\(.*,.*\).*,.*@.*</param>
+				</interceptor-ref>
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="fileUpload">
+					<!-- TODO: make variable -->
+					<param name="maximumSize">2097152</param>
+					<!-- <param name="allowedTypes">image/jpeg,image/png,image/bmp</param> -->
+				</interceptor-ref>
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="actionMappingParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*,d-\d+?-[sopn],.*\\.*,.*\(.*,.*\).*,.*@.*</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="hibernateValidatorInterceptor">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+			</interceptor-stack>
+
+			<interceptor-stack name="locationfinderAdminStack">
+				<interceptor-ref name="paramsPrepareParamsStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="locationfinderAdminStack" />
+	</package>
+
+	<package name="location-index" namespace="/" extends="admin-default">
+		<action name="">
+			<result name="success" type="redirect">Home</result>
+		</action>
+		<action name="Index" class="com.app.fe.web.IndexAction">
+			<result name="location" type="redirect">/admin/location/LocationIndex</result>
+			<result name="application" type="redirect">/admin/application/ApplicationIndex</result>
+			<result name="user" type="redirect">/admin/user/UserIndex</result>
+			<result name="success">/logout</result>
+		</action>
+        <action name="Login" class="com.app.common.fe.impl.LoginAction">        
+            <result name="success">/WEB-INF/content/login.jsp</result>
+        </action>
+		<action name="Home" class="com.app.common.fe.impl.HomeAction">
+			<result name="login" type="redirect">Login</result>
+			<result name="index" type="redirect">Index</result>
+		</action>
+	</package>
+
+	<package name="location-admin" namespace="/admin/location" extends="admin-default">
+		<action name="Location_*" class="com.app.fe.web.admin.location.LocationAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/location/location_edit.jsp</result>
+			<result name="success" type="redirect">LocationList.action?country.countrycode=%{country.countrycode}</result>
+		</action>
+
+		<action name="LocationDelete_*" class="com.app.fe.web.admin.location.LocationDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/location/location_delete.jsp</result>
+			<result name="success" type="redirect">LocationList.action?country.countrycode=%{country.countrycode}</result>
+		</action>
+
+		<action name="LocationImport_*" class="com.app.fe.web.admin.location.LocationImportAction" method="{1}">
+			<result name="success">/WEB-INF/content/admin/location/location_import_success.jsp</result>
+			<result name="input">/WEB-INF/content/admin/location/location_import.jsp</result>
+		</action>
+		
+		<action name="LocationExport_*" class="com.app.fe.web.admin.location.LocationExportAction" method="{1}">
+			<result name="success" type="stream">
+			  <param name="inputName">exportResult.csvStream</param>
+			  <param name="contentType">text/csv</param>
+			  <param name="contentDisposition">attachment;filename="${exportResult.filename}"</param>
+			  <param name="allowCaching">false</param>
+			</result>
+			<result name="input">/WEB-INF/content/admin/location/location_export.jsp</result>
+		</action>
+
+		<action name="LocationIndex" class="com.app.fe.web.admin.location.LocationIndexAction">
+			<result name="success">/WEB-INF/content/admin/location/location_index.jsp</result>
+		</action>
+
+		<action name="LocationList" class="com.app.fe.web.admin.location.LocationListAction" method="list">
+			<result name="success">/WEB-INF/content/admin/location/location_list.jsp</result>
+		</action>
+		
+	</package>
+
+	<package name="application-admin" namespace="/admin/application" extends="admin-default">
+		<action name="ApplicationIndex" class="com.app.fe.web.admin.application.ApplicationIndexAction">
+			<result name="success">/WEB-INF/content/admin/application/application_index.jsp</result>
+		</action>
+		
+		<action name="Application_*" class="com.app.fe.web.admin.application.ApplicationAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/application/application_edit.jsp</result>
+			<result name="success" type="redirect">ApplicationIndex.action</result>
+		</action>
+		
+		<action name="ApplicationDelete_*" class="com.app.fe.web.admin.application.ApplicationDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/application/application_delete.jsp</result>
+			<result name="success" type="redirect">ApplicationIndex.action</result>
+		</action>
+	</package>
+	
+	<package name="application-user" namespace="/admin/user" extends="admin-default">
+		<action name="UserIndex" class="com.app.fe.web.admin.user.UserIndexAction">
+			<result name="success">/WEB-INF/content/admin/user/user_index.jsp</result>
+		</action>
+		
+		<action name="User_*" class="com.app.fe.web.admin.user.UserAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/user/user_edit.jsp</result>
+			<result name="success" type="redirect">UserIndex.action</result>
+		</action>
+		
+		<action name="UserDelete_*" class="com.app.fe.web.admin.user.UserDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/user/user_delete.jsp</result>
+			<result name="success" type="redirect">UserIndex.action</result>
+		</action>
+	</package>
+	
+	<package name="application-country" namespace="/admin/country" extends="admin-default">
+		<action name="CountryIndex" class="com.clinic.fe.web.admin.country.CountryIndexAction">
+			<result name="success">/WEB-INF/content/admin/country/country_index.jsp</result>
+		</action>
+		
+		<action name="Country_*" class="com.clinic.fe.web.admin.country.CountryAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/country/country_edit.jsp</result>
+			<result name="success" type="redirect">CountryIndex.action</result>
+		</action>
+		
+		<action name="CountryDelete_*" class="com.clinic.fe.web.admin.country.CountryDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/country/country_delete.jsp</result>
+			<result name="success" type="redirect">CountryIndex.action</result>
+		</action>
+	</package>
+	
+	<package name="application-serviceGroup" namespace="/admin/serviceGroup" extends="admin-default">
+		<action name="ServiceGroupIndex" class="com.clinic.admin.serviceGroup.ServiceGroupIndexAction">
+			<result name="success">/WEB-INF/content/admin/serviceGroup/serviceGroup_index.jsp</result>
+		</action>
+		
+		<action name="ServiceGroup_*" class="com.clinic.admin.serviceGroup.ServiceGroupAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/serviceGroup/serviceGroup_edit.jsp</result>
+			<result name="success" type="redirect">ServiceGroupIndex.action</result>
+		</action>
+		
+		<action name="ServiceGroupDelete_*" class="com.clinic.admin.serviceGroup.ServiceGroupDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/serviceGroup/serviceGroup_delete.jsp</result>
+			<result name="success" type="redirect">ServiceGroupIndex.action</result>
+		</action>
+		
+		<action name="ServiceGroupList" class="com.clinic.admin.services.ServiceGroupAction" method="list">
+			<result name="success">/WEB-INF/content/admin/serviceGroup/serviceGroup_list.jsp</result>
+		</action>
+	</package>
+	
+	<package name="application-service" namespace="/admin/service" extends="admin-default">
+		<action name="ServiceIndex" class="com.clinic.admin.serviceMaster.ServiceIndexAction">
+			<result name="success">/WEB-INF/content/admin/service/service_index.jsp</result>
+		</action>
+		
+		<action name="ServiceMaster_*" class="com.clinic.admin.serviceMaster.ServiceAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/service/service_edit.jsp</result>
+			<result name="success" type="redirect">ServiceIndex.action</result>
+		</action>
+		
+		<action name="ServiceDelete_*" class="com.clinic.admin.serviceMaster.ServiceDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/service/service_delete.jsp</result>
+			<result name="success" type="redirect">ServiceIndex.action</result>
+		</action>
+		
+		<action name="ServiceList" class="com.clinic.admin.services.ServiceAction" method="list">
+			<result name="success">/WEB-INF/content/admin/service/service_list.jsp</result>
+		</action>
+	</package>
+	
+</struts>

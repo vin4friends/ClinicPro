@@ -1,0 +1,48 @@
+{
+    "stores": [
+        {
+            "lon": -8.3469,
+            "lat": 51.9007,
+            "sitetype" : "Tradequip",
+            "sitename": "Cork",
+            "tradingname" : "BOC Gases Ireland",
+			"street" : "Little Island Industrial Estate",
+			"town" : "Cork",
+			"tel" : "00 353 21 435 3611",
+			"fax" : "+353 21 4353382",
+			"contact" : "Brian Linehan",
+			"openweek" : "Monday-Friday: 9.00am - 5.00pm",
+			"openweekend" : "Closed",
+			"products" : {	"balloons": true,
+							"equipment" : false, 
+						  	"safety" : true,
+						  	"medical" : true,
+						  	"industrial" : true,
+						  	"refrigeration" : true,
+						  	"welding" : true			
+							}
+        },
+        {
+            "lon": -2.3586,
+            "lat": 53.5111,
+            "sitetype" : "Tradequip",
+            "sitename": "Worsley",
+            "tradingname" : "BOC Tradequip",
+			"street" : "Priestley Road Wardley Ind Est  Worsley",
+			"town" : "Manchester",
+			"tel" : "0161 930 6061",
+			"fax" : "0161 930 6375",
+			"contact" : "Rob Meredith",
+			"openweek" : "Monday-Friday: 8.00am until 5.00pm",
+			"openweekend" : "Saturday: 08.00 -12.00 Sunday Closed",
+			"products" : {	"balloons": true,
+							"equipment" : false, 
+						  	"safety" : true,
+						  	"medical" : true,
+						  	"industrial" : true,
+						  	"refrigeration" : true,
+						  	"welding" : true			
+							}
+        }  
+    ]
+}

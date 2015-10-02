@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+ <hibernate-mapping>
+   <class name="com.app.model.impl.Role" table="LFROLE">
+      <id name="id" type="long" column="ID">
+   		<generator class="identity"></generator>      
+      </id>
+      <property name="name" column="NAME" length="255" type="string"  update="false" not-null="false" unique="true"/>
+      <property name="authority" column="AUTHORITY" type="string" length="255"   not-null="false" unique="true" />
+            
+   </class>
+</hibernate-mapping>

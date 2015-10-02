@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="APPLICATION_NAME" value="finder" />
+	
+    <contextName>${APPLICATION_NAME}</contextName>
+	
+	<property name="LOGFILE_NAME_PREFIX" value="locationfinder" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/log/${LOGFILE_NAME_PREFIX}_${APPLICATION_NAME}.log</file>
+
+        <!-- Removes all Log-Entries with Marker (e.g.: File Import Marker) from the Standard-Log.--> 
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+            <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                <expression>
+                    marker == null
+                </expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>target/log/${LOGFILE_NAME_PREFIX}_${APPLICATION_NAME}_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date %-5level [%-20thread] %-50logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILE_IMPEX" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>target/log/${LOGFILE_NAME_PREFIX}_impex.log</file>
+
+        <!-- Log-Entries with Marker MARKER_IMPEX should be appended to this log file. -->
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">      
+            <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                <expression>com.app.logging.LoggingConstants.MARKER_IMPEX.equals(marker)</expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>target/log/${LOGFILE_NAME_PREFIX}_impex_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date %-5level [%-20thread] %-50logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <pattern>%date %-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.app" level="WARN" />
+	<logger name="com.app.services.DefaultFileService" level="TRACE" />    
+    <logger name="org.springframework.security.access.event.LoggerListener" level="WARN" />
+    <logger name="org.springframework.security.authentication.event.LoggerListener" level="WARN" />
+    <logger name="com.opensymphony.xwork2.ognl" level="ERROR" />
+    <logger name="org.hibernate.engine.StatefulPersistenceContext" level="ERROR" />
+    <logger name="org.apache.struts2.util.TextProviderHelper" level="ERROR" />
+
+    <root level="WARN">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="FILE_IMPEX" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>

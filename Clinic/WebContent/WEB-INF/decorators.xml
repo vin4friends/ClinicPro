@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/WEB-INF/content/decorators">
+    <decorator name="main_public" page="main_public.jsp">
+        <pattern>/Login*</pattern>
+        <pattern>/Home*</pattern>
+    </decorator>
+    
+    <decorator name="main_private" page="main_private.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+    
+    <decorator name="panel" page="panel.jsp" />
+    
+    <excludes>
+        <pattern>/index.html</pattern> 
+        <pattern>/styles/*</pattern> 
+        <pattern>/js/*</pattern> 
+        <pattern>/images/*</pattern> 
+        <pattern>/login</pattern>
+    </excludes>
+</decorators>

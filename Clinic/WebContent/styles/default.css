@@ -1,0 +1,208 @@
+/* default.css
+   default stylesheet
+	
+*/
+
+@import "common.css";      
+/* redefined html elements */
+
+body {
+	background: #FFFFFF;
+	margin: 0px 0 0px 10px; /*background: url(../images/bkd_globe.jpg) no-repeat 0px 0px;*/
+	padding-top: 10px;
+	width: 960px;
+}
+
+/* left-hand navigation classes */
+.mainNavLink{
+	border-bottom: 1px solid rgb(194,201,207);
+	margin: 0;
+	padding: 1px 3px 1px 20px;
+}
+
+.mainNavLink a, .mainNavLink a:link, .mainNavLink a:visited, .mainNavSub a, .mainNavSub a:link, .mainNavSub a:visited, .mainNavSub2 a, .mainNavSub2 a:link, .mainNavSub2 a:visited {
+	color: rgb(0,48,83);
+	font-size: 0.9em;
+	text-decoration: none;
+}
+
+.mainNavSub {
+	background: #EDEDED;
+	border-bottom: 1px solid rgb(194,201,207);
+	margin: 0;
+	padding: 1px 3px 1px 30px;
+}
+
+.mainNavSub a:hover, .mainNavSub2 a:hover, .mainNavLink a:hover{
+	color: rgb(0,138,196);
+	font-size: 0.9em;
+	text-decoration: none;
+}
+
+.mainNavSub2 {
+	background: rgb(237,237,237);
+	border-bottom: 1px solid rgb(194,201,207);
+	margin: 0;
+	padding: 1px 3px 1px 40px;
+}
+
+.mainNavTop a, .mainNavTop a:hover, .mainNavTop a:link, .mainNavTop a:visited, .mainNavBot a, .mainNavBot a:hover, .mainNavBot a:link, .mainNavBot a:visited {
+	color: rgb(0,48,83);
+	font-size: 0.9em;
+	margin: 0;
+	padding-left: 20px;
+	text-decoration: none;
+}
+
+/* div container for entire page */
+.mainNavTop, .mainNavBot {
+	border-bottom: 1px solid rgb(194,201,207);
+}
+
+.searchBtn {
+	background: rgb(13,92,145);
+	border: none;
+	color: rgb(255,255,255);
+	font-size: 1em;
+	font-weight: 600;
+	padding: 1px;
+}
+
+.searchInput{
+	border: 1px solid rgb(194,201,207);
+	font-size: 1em;
+	text-decoration: none;
+}
+
+.subNavImage p{
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+/* navigation area on right containing related and external Links */
+.subNavLinks{
+	background: #D2DDE9;
+	margin-bottom: 10px;
+	padding: 8px 8px 3px 8px;
+}
+
+.subNavLinks a:hover {
+	text-decoration: underline;
+}
+
+.subNavLinks h3{
+	margin: 0;
+	padding: 0 0 3px 0;
+}
+
+.subNavLinks p{
+	margin: 0;
+	padding: 0 0 5px 0;
+}
+
+#breadcrumbs {
+	background: #D2DDE9;
+	color: rgb(0,138,196);
+	margin-bottom: 10px;
+	padding: 2px 0 2px 10px;
+	vertical-align: bottom;
+}
+
+/* breadcrumb hyperlinks */
+#breadcrumbs a, #breadcrumbs a:hover, #breadcrumbs a:link, #breadcrumbs a:visited {
+	color: rgb(0,138,196);
+	text-decoration: none;
+}
+
+/* div container for article */
+#container {
+	float: left;
+	width: 753px;
+}
+
+#footer{
+	clear: both;
+	font-size: 0.9em;
+	margin-top: 20px;
+	width: 100%;
+}
+
+#footer a img {
+	padding-right: 2px;
+}
+
+#footer a, #footer a:hover, #footer a:link, #footer a:visited {
+	color: rgb(13,92,145);
+	padding-right: 20px;
+	text-decoration: none;
+}
+
+#footerCopy a, #footerCopy a:hover, #footerCopy a:link, #footerCopy a:visited {
+	padding: 0 0 0 20px;
+}
+
+#footerLine {
+	border-top: 1px solid rgb(194,201,207);
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+#footerLink {
+	padding-top: 20px;
+}
+
+#footerLink, #footerCopy {
+	padding-left: 207px;
+}
+
+#footerLogo {
+	float: left;
+	width: 207px;
+}
+
+/* global navigation area within header */
+#globalNav {
+	clear: both;
+	padding-bottom: 13px;
+	padding-left: 290px;
+	padding-top: 14px;
+}
+
+#globalNavLink a, #globalNavLink a:hover, #globalNavLink a:link, #globalNavLink a:visited {
+	color: rgb(0,138,196);
+	font-size: 0.9em;
+	padding: 0 8px 0 8px;
+	text-decoration: none;
+}
+
+#header, #wrapper {
+	width: 960px;
+}
+
+/* div container for left-hand navigation*/
+#mainNav{
+	float: left;
+	margin-bottom: 10px;
+	margin-right: 32px;
+	margin-top: 20px;
+	width: 175px;
+}
+
+/* div container for print link*/
+#print{
+	display: none;
+}
+
+/* div container for search */
+#search{
+	color: rgb(13,92,145);
+	float: left;
+	font-size: 0.9em;
+	padding-right: 20px;
+}
+
+/* div container for related and external links area */
+#subNav {
+	float: right;
+	width: 200px;
+}

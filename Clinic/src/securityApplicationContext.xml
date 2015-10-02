@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<global-method-security pre-post-annotations="enabled">
+		<expression-handler ref="lfMethodSecurityExpressionHandler" />
+	</global-method-security>
+
+	<!-- needs to be defined before http element or an second DefaultWebSecurityExpressionHandler 
+		will be created and used by the authorize-Tags. -->
+	<beans:bean id="webSecurityExpressionHandler"
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler">
+		<beans:property name="roleHierarchy" ref="roleHierarchy" />
+	</beans:bean>
+
+	<http realm="LocationFinder Security Realm" create-session="always"
+		entry-point-ref="authenticationEntryPoint" use-expressions="true"
+		access-decision-manager-ref="webAccessDecisionManager">
+		<intercept-url pattern="/" filters="none" />
+		<intercept-url pattern="/index.html" filters="none" />
+		<intercept-url pattern="/favicon.ico" filters="none" />
+		<intercept-url pattern="/styles/*" filters="none" />
+		<intercept-url pattern="/images/*" filters="none" />
+		<intercept-url pattern="/js/*" filters="none" />
+		<intercept-url pattern="/Home*" access="anonymous" />
+		<intercept-url pattern="/version*" access="anonymous" />
+		<intercept-url pattern="/Login*" access="anonymous" />
+		<intercept-url pattern="/Index*" access="authenticated" />
+		<intercept-url pattern="/admin/location/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
+		<intercept-url pattern="/admin/country/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
+		<intercept-url pattern="/admin/serviceGroup/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
+		<intercept-url pattern="/admin/service/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
+		<intercept-url pattern="/admin/application/*" access="hasRole('ROLE_SUPER_ADMIN')" />
+		<intercept-url pattern="/admin/user/*" access="hasRole('ROLE_SUPPORT_ADMIN')" />
+		<intercept-url pattern="/**" access="denyAll" />
+
+		<anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />
+
+		<access-denied-handler error-page="/logout" />
+
+		<logout logout-url="/logout" invalidate-session="true" />
+
+		<form-login 
+			always-use-default-target="true"
+			authentication-failure-url="/Login.action"
+			default-target-url="/Index.action" 
+			login-page="/login"
+			login-processing-url="/login" />
+
+		<session-management session-fixation-protection="newSession" />
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="authenticationProvider" />
+	</authentication-manager>
+
+	<beans:bean id="authenticationProvider"
+		class="com.app.common.fe.impl.security.AuthenticationProvider" />
+
+	<beans:bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/Login.action" />
+	</beans:bean>
+
+	<beans:bean id="loggerListener"
+		class="org.springframework.security.authentication.event.LoggerListener" />
+
+	<!-- security:authorize tags using the url attribute will delegate to this 
+		accessDecisionManager -->
+	<beans:bean id="webAccessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:ref bean="webExpressionVoter" />
+				<beans:ref bean="roleVoter" />
+				<beans:ref bean="authenticatedVoter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="webExpressionVoter"
+		class="org.springframework.security.web.access.expression.WebExpressionVoter">
+		<beans:property name="expressionHandler" ref="webSecurityExpressionHandler" />
+	</beans:bean>
+
+	<beans:bean id="roleVoter"
+		class="org.springframework.security.access.vote.RoleVoter" />
+
+	<beans:bean id="authenticatedVoter"
+		class="org.springframework.security.access.vote.AuthenticatedVoter" />
+
+	<!-- Expressionhandler for Method Security -->
+	<beans:bean id="lfMethodSecurityExpressionHandler"
+		class="com.app.security.LfMethodSecurityExpressionHandler">
+		<beans:property name="permissionEvaluator" ref="lfPermissionEvaluator" />
+		<beans:property name="roleHierarchy" ref="roleHierarchy" />
+	</beans:bean>
+
+	<beans:bean id="roleHierarchy"
+		class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+		<beans:property name="hierarchy">
+			<beans:value>
+				ROLE_SUPER_ADMIN > ROLE_LOCATION_ADMIN
+				ROLE_SUPER_ADMIN > ROLE_SUPPORT_ADMIN
+			</beans:value>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="lfPermissionEvaluator"
+		class="com.app.security.PermissionEvaluatorImpl" />
+</beans:beans>   

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<property_file_list>
+    <property id="lf.jdbc.driver">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.username">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.password">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.host">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.port">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.schema">
+        <file relative_path="persistence.properties"/>
+        <file relative_path="persistence-spring.xml"/>
+    </property>
+    <property id="lf.jdbc.url.base">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.url">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.pool.initialSize">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.pool.minSize">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.jdbc.pool.maxSize">
+        <file relative_path="persistence.properties"/>
+    </property>
+    <property id="lf.logging.dir">
+        <file relative_path="logback-configuration.xml"/>
+        <file relative_path="application.properties"/>
+    </property>
+    <property id="lf.logging.level.root">
+        <file relative_path="logback-configuration.xml"/>
+    </property>
+    <property id="lf.logging.level.com.app">
+        <file relative_path="logback-configuration.xml"/>
+    </property>
+    <property id="lf.logging.level.com.app.import">
+        <file relative_path="logback-configuration.xml"/>
+    </property>
+    <property id="lf.version.showOnPages">
+    	<file relative_path="version.properties" />
+    </property>
+    <property id="env.name">
+    	<file relative_path="version.properties" />
+    </property>
+    <property id="property.file.name">
+    	<file relative_path="version.properties" />
+    </property>
+</property_file_list>

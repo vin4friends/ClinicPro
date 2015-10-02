@@ -1,0 +1,10 @@
+<html> 
+<head>
+
+	<script type="text/javascript" src="<!-- insert correct path to JavaScript file here-->"></script>
+
+</head>
+<body onload="checkParameter()"> 
+
+</body> 
+</html>

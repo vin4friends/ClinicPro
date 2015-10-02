@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.app" />
+
+	<aop:aspectj-autoproxy />
+	<aop:config>
+		<aop:advisor advice-ref="transactionAdvice"
+			pointcut="com.app.aspect.LocationfinderSystemArchitecture.daoLayer()" />
+		<aop:advisor advice-ref="transactionAdvice"
+			pointcut="com.app.aspect.LocationfinderSystemArchitecture.serviceLayer()" />
+	</aop:config>
+
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="SUPPORTS" isolation="DEFAULT"
+				read-only="true" timeout="-1" />
+			<tx:method name="find*" propagation="SUPPORTS" isolation="DEFAULT"
+				read-only="true" timeout="-1" />
+			<tx:method name="is*" propagation="SUPPORTS" isolation="DEFAULT"
+				read-only="true" timeout="-1" />
+			<tx:method name="validate*" propagation="REQUIRED"
+				isolation="DEFAULT" read-only="true" timeout="-1" />
+			<tx:method name="import*" propagation="REQUIRED" isolation="DEFAULT"
+				rollback-for="ImportFailedException" timeout="-1" />
+			<tx:method name="*" isolation="DEFAULT" propagation="REQUIRED"
+				timeout="-1" />
+		</tx:attributes>
+	</tx:advice>
+
+	<tx:annotation-driven />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="user" value="db2admin" />
+		<property name="password" value="welcome1@" />
+		<property name="jdbcUrl" value="jdbc:db2://localhost:50000/devdb" />
+		<property name="initialPoolSize" value="1" />
+		<property name="minPoolSize" value="1" />
+		<property name="maxPoolSize" value="10" />
+		<property name="preferredTestQuery" value="SELECT 1;" />
+		<property name="idleConnectionTestPeriod" value="30" />
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="validatorFactory"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+		
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		
+
+		<property name="mappingResources">
+			<list>
+			 <value>./resources/Productcategory.hbm.xml</value>
+		 <value>./resources/Icon.hbm.xml</value>						
+		 <value>./resources/Application.hbm.xml</value>
+		 <value>./resources/Role.hbm.xml</value>
+		 <value>./resources/Location.hbm.xml</value>
+		 <value>./resources/Locationtype.hbm.xml</value>
+		 <value>./resources/Lfuser.hbm.xml</value>
+		 <value>./resources/Country.hbm.xml</value>
+		 <value>./resources/Imageset.hbm.xml</value>
+		 <value>./resources/Locationtypeicon.hbm.xml</value>
+		 <value>./resources/productcategoryicon.hbm.xml</value>
+		 
+			 
+				
+			</list>
+		</property>
+
+
+
+		<property name="hibernateProperties">
+			<value>
+
+				hibernate.dialect=org.hibernate.dialect.DB2Dialect
+				hibernate.hbm2ddl.auto=validate
+				hibernate.default_schema=admin096
+				hibernate.show_sql=true
+				hibernate.format_sql=false
+				use_sql_comments=false=false
+				hibernate.use_sql_comments
+              
+		</value>
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+	
+	<bean id="dao" class="com.app.GenericDaoImpl" >
+	<property name="hibernateTemplate" ref="hibernateTemplate"></property>	
+	</bean>	
+</beans>

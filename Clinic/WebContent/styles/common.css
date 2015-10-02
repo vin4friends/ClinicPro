@@ -1,0 +1,147 @@
+/* common.css
+   stylesheet containing common selectors shared by default.css & print.css
+*/
+/* redefined html elements */
+
+a, a:hover, a:link, a:visited {
+	color: rgb(0,138,196);
+	text-decoration: none;
+}
+
+body {
+	border: 0;
+	color: #000000;
+	font: 75% Arial, Univers, Helvetica, sans-serif;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	color: rgb(13,92,145);
+	font-size: 1.7em;
+	font-weight: normal;
+	margin: 0px;
+	padding: 5px 0 10px 0;
+}
+
+h2 {
+	color: #000000;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0px;
+	padding: 3px 0 3px 0;
+}
+
+h3 {
+	color: rgb(13,92,145);
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0px;
+	padding: 2px 0 5px 0;
+}
+
+hr {
+	color: rgb(194,201,207);
+	height: 1px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+img {
+	border: 0;
+}
+
+p {
+	margin: 0;
+	padding: 0 0 1em;
+}
+
+table {
+	font-size: 1em !important;
+}
+
+ul {
+	margin-top: 0;
+}
+
+.download a, .download a:hover, .download a:link, .download a:visited {
+	color: rgb(13,92,145);
+	text-decoration: none;
+}
+
+.download img{
+	padding-right: 3px;
+}
+
+.download p{
+	margin: 0;
+	padding-bottom: 1px;
+}
+
+.divider {
+ 	padding: 0 10px 1px 10px;
+}
+
+.image {
+	margin-bottom: 10px;
+}
+
+/*RSS News Feed*/
+.rssFeed h3 {
+	padding-bottom: 2px;
+}
+
+.summaryLink h3 {
+	padding: 0;
+	padding-bottom: 2px;
+}
+
+.teaser {
+	margin-bottom: 20px;
+	width: 210px;
+}
+
+.teaser h2 {
+	background: transparent url(/home/images/bkd_underscore.gif) repeat-x right bottom;
+	color: rgb(0,138,196);
+	margin-bottom: 8px;
+	padding: 0;
+}
+
+.teaser h2 span {
+	background: #FFFFFF;
+	color: rgb(0,138,196);
+	margin: 0;
+	padding: 0 6px 0 0;
+}
+
+.teaser img {
+	padding-right: 10px;
+}
+
+.teaser p{
+	font-size: 0.9em;
+	padding-top: 0px;
+	vertical-align: top;
+}
+
+/* div container for wide column 1 */
+#article {
+	float: left;
+	width: 517px;
+}
+
+/* div container for narrow columns 1 or 2 */
+#article1 {
+	float: left;
+	margin-right: 20px;
+	width: 245px;
+}
+#article2 {
+	float: left;
+	margin-right: 20px;
+	width: 245px;
+}

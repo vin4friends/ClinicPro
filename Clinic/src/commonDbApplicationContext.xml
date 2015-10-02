@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="?{lf.jdbc.driver}" />
+		<property name="user" value="?{lf.jdbc.username}" />
+		<property name="password" value="?{lf.jdbc.password}" />
+		<property name="jdbcUrl" value="?{lf.jdbc.url}" />
+		<property name="initialPoolSize" value="?{lf.jdbc.pool.initialSize}" />
+		<property name="minPoolSize" value="?{lf.jdbc.pool.minSize}" />
+		<property name="maxPoolSize" value="?{lf.jdbc.pool.maxSize}" />
+		<property name="preferredTestQuery" value="SELECT 1;" />
+		<property name="idleConnectionTestPeriod" value="30" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		
+
+		<property name="mappingResources">
+		<list>
+			 <value>./resources/Productcategory.hbm.xml</value>
+		 <value>./resources/Icon.hbm.xml</value>						
+		 <value>./resources/Application.hbm.xml</value>
+		 <value>./resources/Role.hbm.xml</value>
+		 <value>./resources/Location.hbm.xml</value>
+		 <value>./resources/Locationtype.hbm.xml</value>
+		 <value>./resources/Lfuser.hbm.xml</value>
+		 <value>./resources/Country.hbm.xml</value>
+		 <value>./resources/Imageset.hbm.xml</value>
+		 <value>./resources/Locationtypeicon.hbm.xml</value>
+		 <value>./resources/Productcategoryicon.hbm.xml</value>
+		 <value>./resources/EnvironmentProperty.hbm.xml</value>
+		  <value>./resources/AppCountry.hbm.xml</value>
+		  <value>./resources/ServiceGroup.hbm.xml</value>
+		  <value>./resources/ServiceMaster.hbm.xml</value>
+		 </list>
+		</property>
+		<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<prop key="hibernate.hbm2ddl.auto">validate</prop>
+			<prop key="hibernate.default_schema">?{lf.jdbc.schema}</prop>
+			<prop key="hibernate.show_sql">false</prop>
+			<prop key="hibernate.format_sql">false</prop>
+			<prop key="use_sql_comments">false</prop>
+			<prop key="hibernate.use_sql_comments">false</prop>				
+		</props>
+			
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="dao" class="com.app.GenericDaoImpl" >
+	<property name="hibernateTemplate" ref="hibernateTemplate"></property>	
+	</bean>	
+
+	<bean id="validatorFactory"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!--
+		<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" /> <property
+		name="jpaDialect" ref="jpaDialect" /> <property
+		name="persistenceXmlLocation"
+		value="file:?{lf.external.configuration.dir}/persistence-spring.xml"
+		/> <property name="jpaPropertyMap"> <map> <entry
+		key="javax.persistence.validation.factory"
+		value-ref="validatorFactory" /> </map> </property> </bean> <bean
+		id="validatorFactory"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"
+		/> <bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager"> <property
+		name="entityManagerFactory" ref="entityManagerFactory" /> <property
+		name="jpaDialect" ref="jpaDialect" /> </bean> <bean id="jpaDialect"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+	-->
+
+
+</beans>

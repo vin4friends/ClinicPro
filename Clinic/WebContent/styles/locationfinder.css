@@ -1,0 +1,391 @@
+@import "default.css";
+
+table#loginTable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#loginForm {
+	margin-top: 10em;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#loginForm h1 {
+	text-align: center;
+}
+
+.paging {
+	margin-bottom: 5px;
+	padding-top: 5px;
+}
+
+.pagingRight {
+	float: right;
+	width: 50%;
+}
+
+.pagingLeft {
+	float: left;
+	width: 50%;
+	padding-top: 3px;
+}
+
+.pagingRight ul li {
+	float: left;
+	overflow: hidden;
+}
+
+.geoCoords { 
+	/* float: right; */
+	
+}
+.required {
+	color: red;
+	padding: 0 0.1em;	
+}
+.errorLabel .required {
+	color: #FFFFFF;
+}
+.checkboxLabel {
+	font-weight: normal !important;
+}
+
+div#search .grp,div#search .ctrl,div#search .label {
+	float: left;
+}
+
+div#search .label {
+	margin-top: 0.4em;
+}
+
+label.radioLabel {
+	font-weight: normal !important;
+}
+
+label.errorLabel {
+	background-color: red;
+	color: #FFFFFF;
+}
+
+span.label {
+	font-weight: bold;
+	padding: 0 2px;
+}
+
+span.input {
+	display: block;
+	margin: 2px;
+	padding: 1px 4px;
+}
+
+td.ctrl textarea,td.errorCtrl textarea {
+	width: 70.2%; 
+}
+
+td.ctrl input[type="text"],td.errorCtrl input[type="text"] {
+	width: 70%;
+}
+
+td.ctrl select,td.errorCtrl select {
+	width: 72.2%;
+}
+
+.mediumInput {
+	width: 42% !important;
+}
+
+.smallInput {
+	width: 18.4% !important;
+}
+
+.errorCtrl input,.errorCtrl select,.errorCtrl textarea {
+	border: 1px solid red !important;
+	margin-top: 0 !important;
+}
+
+div.grp label.errorLabel {
+	margin-left: 2px;
+}
+
+div.errorCtrl p.errorInfo span {
+	border-left: 1px solid red;
+	padding-left: 0.2em;
+	margin-left: 2px;
+}
+
+td.errorCtrl p.errorInfo span {
+	padding-left: 0.2em;
+}
+
+.errorInfo {
+	font-size: 0.9em;
+	font-style: italic;
+	color: red;
+	padding: 0;
+}
+
+.errorMessage {
+	color: red;
+}
+
+ul.errorMessage {
+	list-style-type: none;
+}
+
+div#search .ctrl input[type="submit"] {
+	margin-top: 0.3em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+}
+
+.pagingNav a {
+	text-decoration: none !important;
+	font-weight: normal;
+	padding: 3px 3px 2px 3px !important;
+	display: block;
+	margin: 1px;
+}
+
+.pagingNav a:hover,.pagingNav a:active {
+	text-decoration: none !important;
+	background-color: #D2DDE9;
+	padding: 3px 3px 2px 3px !important;
+	display: block;
+	margin: 1px;
+}
+
+.pagingCount a {
+	border: 1px solid rgb(194, 201, 207);
+}
+
+.pagingCount a:hover,.pagingCount a:active {
+	border: 1px solid rgb(194, 201, 207);
+	background-color: #D2DDE9;
+	text-decoration: none !important;
+	padding: 1px 3px 2px 3px !important;
+	display: block;
+	margin: 1px;
+}
+
+.pagingCount a,.pagingCount strong {
+	text-decoration: none !important;
+	font-weight: normal;
+	padding: 1px 3px 2px 3px !important;
+	display: block;
+	margin: 1px;
+}
+
+.pagingCount strong {
+	background-color: #D2DDE9;
+	color: rgb(0, 138, 196) !important;
+	border: 1px solid rgb(194, 201, 207);
+}
+
+.pagingNav {
+	margin-left: -1px;
+}
+
+.pagingCount {
+	margin-left: -1px;
+}
+
+.pagingLeft p {
+	float: left;
+}
+
+.pagingRight ul {
+	float: right;
+	margin-top: 1px;
+}
+
+.nextStep {
+	padding-left: 4.1em;
+	padding-top: 0.5em;
+	padding-bottom: 2em;
+	padding-right: 2em;
+	border: 2px solid rgb(194, 201, 207);
+	margin: 10px 0;
+	background-color: #EDEDED;
+}
+
+.noResult,.confirm {
+	padding-left: 4.1em;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+	padding-right: 4.1em;
+}
+
+.noResult h3,.noResult h2,.noResult strong {
+	margin: 0 0 0.2em 0;
+}
+
+.internNav {
+	background-color: #D2DDE9;
+	padding-bottom: 11px;
+	padding-top: 8px;
+	margin-bottom: 0.5em;
+}
+
+.internNav ul {
+	width: 97%;
+	padding: 0;
+	list-style-type: none;
+}
+
+.internNav ul li {
+	float: left;
+	padding-left: 1em;
+}
+
+.internNav ul li a:focus,.internNav ul li a:hover,.internNav ul li a:active {
+	text-decoration: underline;
+}
+
+input:focus,input:hover,input:active,select:focus,select:hover,select:active,textarea:focus,textarea:hover,textarea:active {
+	outline: 1px solid #CC3333;
+}
+
+input[disabled],select[disabled],textarea[disabled],input[readonly],textarea[readonly] {
+	outline: none !important;
+}
+
+input {
+	padding: 1px 4px;
+	margin-top: 2px;
+}
+
+textarea, input[type="text"], input[type="password"], select {
+	border: 1px solid rgb(194, 201, 207);
+}
+
+input.searchInput {
+	margin-right: 0.5em;
+}
+
+textarea,select {
+	padding: 0.1em 0.3em;
+	margin-top: 2px;
+}
+
+label {
+	padding: 0 0.2em 0 0.2em;
+	font-weight: bold;
+}
+
+.wwctrl label {
+	font-weight: normal !important;
+}
+
+table {
+	border-spacing: 0 !important;
+	width: 100%;
+}
+
+table label span {
+	padding: 0;
+}
+
+table th,table thead tr td {
+	line-height: 1.1em;
+	vertical-align: bottom;
+	font-weight: bold;
+}
+
+td div,th div {
+	padding: 0.3em 0.1em !important;
+	position: relative;
+	margin: 0 !important;
+}
+
+td div div,th div div {
+	padding: 0 !important;
+}
+
+td.firstCol,th.firstCol {
+	border-left: none !important;
+}
+
+table.groupedCol th,table thead tr td {
+	background: rgb(13, 92, 145);
+	color: #FFFFFF;
+	margin: 0;
+	padding: 0;
+	border-left: 1px solid #FFFFFF; /*rgb(194,201,207);*/
+	overflow: hidden;
+}
+
+table.groupedCol thead tr th span {
+	padding: 0.3em 0.5em;
+	display: block;
+}
+
+table.groupedCol tr td {
+	padding-left: 0.3em;
+	border-left: 1px solid rgb(194, 201, 207);
+}
+
+table.groupedCol td {
+	border-bottom: 1px solid rgb(194, 201, 207);
+	overflow: hidden;
+}
+
+table.groupedCol tbody tr:hover {
+	background-color: #D2DDE9;
+	color: rgb(0, 0, 0);
+}
+
+table.groupedCol tbody tr:hover td {
+	border-left: 1px solid rgb(194, 201, 207);
+	background-color: #D2DDE9;
+	color: rgb(0, 0, 0);
+}
+
+table.groupedCol tbody tr:hover td.firstCol {
+	border-left: none;
+}
+
+table.groupedCol th.tableBorderNone,table td.tableBorderNone {
+	border-left: none;
+	border-right: none;
+}
+
+table.groupedCol a:hover {
+	text-decoration: underline;
+}
+
+table.groupedCol th a,table.groupedCol th span {
+	display: block;
+}
+
+table.groupedCol th span,table.groupedCol td div {
+	overflow: hidden;
+}
+
+#footer {
+	padding-top: 20px;
+}
+
+#footer ul {
+	padding-top: 20px;
+	list-style: none;
+}
+
+#footer ul li {
+	float: left;
+}
+#footer ul li strong {
+	font-weight: normal;
+	padding-right: 7px;
+	display: block;
+	margin-top: -3px;	
+}
+#footer .copyright {
+	font-size: 1.25em;
+}
+
+.clearFloat {
+        clear: both;
+        padding: 0;
+}

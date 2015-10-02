@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+
+	<package name="locationfinder-default" extends="struts-default">
+        <result-types>
+            <result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
+        </result-types>
+	
+		<interceptors>
+			<interceptor-stack name="paramsPrepareParamsStack">
+				<interceptor-ref name="exception">
+					<param name="logEnabled">true</param>
+					<param name="logLevel">ERROR</param>
+				</interceptor-ref>
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="multiselect" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*,d-\d+?-[sopn],.*\\.*,.*\(.*,.*\).*,.*@.*</param>
+				</interceptor-ref>
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="fileUpload">
+					<!-- TODO: make variable -->
+					<param name="maximumSize">2097152</param>
+					<!-- <param name="allowedTypes">image/jpeg,image/png,image/bmp</param> -->
+				</interceptor-ref>
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="actionMappingParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*,d-\d+?-[sopn],.*\\.*,.*\(.*,.*\).*,.*@.*</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+			</interceptor-stack>
+
+			<interceptor-stack name="locationfinderStack">
+				<interceptor-ref name="paramsPrepareParamsStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="locationfinderStack" />
+		
+		<!-- <default-action-ref name="NotFound"/>  -->
+		
+		<action name="NotFound">
+            <result>/pages/accessDenied.jsp</result>
+        </action>
+	</package>
+	
+    <package name="version" namespace="/version" extends="locationfinder-default">
+        <action name="Version" class="com.app.common.fe.impl.VersionAction">
+            <result name="success">WEB-INF/content/common/version/version.jsp</result>
+        </action>
+        <action name="VersionSmall" class="com.app.common.fe.impl.VersionAction">
+            <interceptor-ref name="exception"/>
+            <interceptor-ref name="i18n" />
+            <result name="success">/WEB-INF/content/common/version/versionSmall.jsp</result>
+        </action>
+    </package>
+</struts>
