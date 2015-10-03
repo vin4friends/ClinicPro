@@ -51,5 +51,7 @@
 				<s:param name="labelcolspan" value="1" /> 
 				<s:param name="inputcolspan" value="2" />
 			</s:checkbox>
+			</tbody>
+		</table>
 	<s:submit key="common.button.save" action="%{nextStep}" />
 </s:form>
