@@ -204,4 +204,24 @@
 		</action>
 	</package>
 	
+	<package name="application-generalMaster" namespace="/admin/generalMaster" extends="admin-default">
+		<action name="GeneralMasterIndex" class="com.clinic.admin.GeneralMaster.GeneralMasterIndexAction">
+			<result name="success">/WEB-INF/content/admin/generalMaster/generalMaster_index.jsp</result>
+		</action>
+		
+		<action name="GeneralMaster_*" class="com.clinic.admin.GeneralMaster.GeneralMasterAddEditAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/generalMaster/generalMaster_edit.jsp</result>
+			<result name="success" type="redirect">GeneralMasterIndex.action</result>
+		</action>
+		
+		<action name="GeneralMasterDelete_*" class="com.clinic.admin.GeneralMaster.GeneralMasterDeleteAction" method="{1}">
+			<result name="input">/WEB-INF/content/admin/generalMaster/generalMaster_delete.jsp</result>
+			<result name="success" type="redirect">GeneralMasterIndex.action</result>
+		</action>
+		
+		<action name="GeneralMasterList" class="com.clinic.admin.GeneralMaster.GeneralMasterAction" method="list">
+			<result name="success">/WEB-INF/content/admin/generalMaster/generalMaster_list.jsp</result>
+		</action>
+	</package>
+	
 </struts>

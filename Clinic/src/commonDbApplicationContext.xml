@@ -38,6 +38,7 @@
 		  <value>./resources/AppCountry.hbm.xml</value>
 		  <value>./resources/ServiceGroup.hbm.xml</value>
 		  <value>./resources/ServiceMaster.hbm.xml</value>
+		  <value>./resources/GeneralMaster.hbm.xml</value>
 		 </list>
 		</property>
 		<property name="hibernateProperties">

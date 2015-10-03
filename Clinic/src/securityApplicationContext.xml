@@ -33,6 +33,7 @@
 		<intercept-url pattern="/admin/location/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
 		<intercept-url pattern="/admin/country/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
 		<intercept-url pattern="/admin/serviceGroup/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
+		<intercept-url pattern="/admin/generalMaster/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
 		<intercept-url pattern="/admin/service/*" access="hasRole('ROLE_LOCATION_ADMIN')" />
 		<intercept-url pattern="/admin/application/*" access="hasRole('ROLE_SUPER_ADMIN')" />
 		<intercept-url pattern="/admin/user/*" access="hasRole('ROLE_SUPPORT_ADMIN')" />

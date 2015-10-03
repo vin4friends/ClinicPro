@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="Generalmaster" table="generalmaster" catalog="devdb">
+    <class name="com.clinic.admin.model.impl.GeneralMaster" table="GENERALMASTER" >
         <id name="docid" type="java.lang.Long">
             <column name="DOCID" />
             <generator class="identity" />

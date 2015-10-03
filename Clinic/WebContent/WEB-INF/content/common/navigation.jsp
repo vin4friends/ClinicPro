@@ -48,6 +48,14 @@
 	</div>
 </sec:authorize>
 
+<sec:authorize access="hasRole('ROLE_SUPPORT_ADMIN') and fullyAuthenticated">
+	<div class="mainNavLink">
+		<s:a namespace="/admin/generalMaster" action="GeneralMasterIndex" id="navigation_link_admin_generalMaster_index">
+			<span><s:text name="navigation.admin.generalMaster.index.link" /></span>
+		</s:a>
+	</div>
+</sec:authorize>
+
 <sec:authorize access="fullyAuthenticated">
 	<div class="mainNavLink">
 		<a href="<s:url value="/logout" />"><s:text name="common.logout"/></a>
